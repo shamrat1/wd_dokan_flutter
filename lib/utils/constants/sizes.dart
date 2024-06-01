@@ -1,4 +1,3 @@
-
 class TSizes {
   // Padding and margin sizes
   static const double xs = 4.0;
@@ -8,10 +7,10 @@ class TSizes {
   static const double xl = 32.0;
 
   // Icon sizes
-  static const double iconXs = 12.0;
-  static const double iconSm = 16.0;
-  static const double iconMd = 24.0;
-  static const double iconLg = 32.0;
+  static const double iconXs = 10.0;
+  static const double iconSm = 14.0;
+  static const double iconMd = 22.0;
+  static const double iconLg = 30.0;
 
   // Font sizes
   static const double fontSizeSm = 14.0;
@@ -68,6 +67,3 @@ class TSizes {
   // Grid view spacing
   static const double gridViewSpacing = 16.0;
 }
-
-
-
