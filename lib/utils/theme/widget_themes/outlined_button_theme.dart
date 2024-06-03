@@ -16,8 +16,8 @@ class TOutlinedButtonTheme {
       side: const BorderSide(color: TColors.borderPrimary),
       textStyle: const TextStyle(
           fontSize: 16, color: TColors.black, fontWeight: FontWeight.w600),
-      padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
+      padding:
+          EdgeInsets.symmetric(vertical: TSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
@@ -32,8 +32,8 @@ class TOutlinedButtonTheme {
       side: const BorderSide(color: TColors.borderPrimary),
       textStyle: const TextStyle(
           fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
-      padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight, horizontal: 20),
+      padding:
+          EdgeInsets.symmetric(vertical: TSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
