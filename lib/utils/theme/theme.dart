@@ -1,3 +1,4 @@
+import 'package:dokan/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:dokan/utils/theme/widget_themes/appbar_theme.dart';
 import 'package:dokan/utils/theme/widget_themes/bottom_sheet_theme.dart';
@@ -26,6 +27,24 @@ class TAppTheme {
     elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: const CircleBorder(),
+      backgroundColor: TColors.primary,
+      iconSize: TSizes.iconMd,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: TColors.light,
+      selectedIconTheme: IconThemeData(
+        size: TSizes.iconMd,
+        color: TColors.primary,
+      ),
+      unselectedIconTheme: IconThemeData(
+        size: TSizes.iconSm,
+        color: TColors.darkGrey,
+      ),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
