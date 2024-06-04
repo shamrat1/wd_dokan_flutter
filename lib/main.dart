@@ -7,6 +7,7 @@ import 'package:dokan/utils/constants/colors.dart';
 import 'package:dokan/utils/constants/sizes.dart';
 import 'package:dokan/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -19,18 +20,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 801),
-      splitScreenMode: false,
-      minTextAdapt: true,
-      builder: (context, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Dokan',
-          theme: TAppTheme.lightTheme,
-          home: const LandingPage(),
-        );
-      },
+    return ProviderScope(
+      child: ScreenUtilInit(
+        designSize: const Size(375, 801),
+        splitScreenMode: false,
+        minTextAdapt: true,
+        builder: (context, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Dokan',
+            theme: TAppTheme.lightTheme,
+            home: const LandingPage(),
+          );
+        },
+      ),
     );
   }
 }
@@ -94,17 +97,15 @@ class _LandingPageState extends State<LandingPage> {
         notchSmoothness: NotchSmoothness.softEdge,
         activeColor: TColors.primary,
         inactiveColor: TColors.darkGrey,
-        onTap: (index) => setState(() => _currentPage = index),
+        onTap: (index) {
+          setState(() {
+            _currentPage = index;
+            _pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeIn);
+          });
+        },
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _currentPage,
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //   ],
-      // ),
     );
   }
 }
