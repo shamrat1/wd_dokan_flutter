@@ -3,6 +3,8 @@ import 'package:dokan/pages/category.dart';
 import 'package:dokan/pages/home.dart';
 import 'package:dokan/pages/profile.dart';
 import 'package:dokan/pages/shopping_cart.dart';
+import 'package:dokan/pages/signin.dart';
+import 'package:dokan/pages/signup.dart';
 import 'package:dokan/utils/constants/colors.dart';
 import 'package:dokan/utils/constants/sizes.dart';
 import 'package:dokan/utils/theme/theme.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Dokan',
             theme: TAppTheme.lightTheme,
-            home: const LandingPage(),
+            home: const SignupPage(),
           );
         },
       ),

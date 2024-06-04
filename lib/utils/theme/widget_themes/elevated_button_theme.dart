@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
@@ -17,8 +18,10 @@ class TElevatedButtonTheme {
       disabledBackgroundColor: TColors.buttonDisabled,
       side: const BorderSide(color: TColors.primary),
       padding: EdgeInsets.symmetric(vertical: TSizes.buttonHeight),
-      textStyle: const TextStyle(
-          fontSize: 16, color: TColors.textWhite, fontWeight: FontWeight.w600),
+      textStyle: TextStyle(
+          fontSize: 16.sp,
+          color: TColors.textWhite,
+          fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
     ),
