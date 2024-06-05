@@ -31,7 +31,7 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 83.h),
+                  padding: EdgeInsets.symmetric(vertical: 50.h),
                   child: Image.asset(
                     "assets/logo.png",
                     height: 50.h,
@@ -39,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 40.h),
+                  padding: EdgeInsets.only(bottom: 30.h),
                   child: Text(
                     "Sign Up",
                     style: Theme.of(context)
