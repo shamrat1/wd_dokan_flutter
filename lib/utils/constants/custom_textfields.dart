@@ -34,6 +34,9 @@ class TCustomTextFields {
           hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: TColors.darkGrey,
               ),
+          errorStyle: Theme.of(context).textTheme.labelSmall!.copyWith(
+                color: Colors.red,
+              ),
           prefixIcon: prefixIcon == null
               ? null
               : Icon(
