@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:dokan/models/social_icon_button.dart';
+import 'package:dokan/pages/signin.dart';
+import 'package:dokan/repositories/auth_repositories.dart';
 import 'package:dokan/utils/constants/colors.dart';
 import 'package:dokan/utils/constants/custom_textfields.dart';
 import 'package:dokan/utils/constants/shadows.dart';
@@ -23,10 +27,11 @@ class _SignupPageState extends State<SignupPage> {
   String? _emailError;
   String? _passwordError;
   String? _confirmPasswordError;
+  bool _loading = false;
 
   bool _validate() {
     if (_nameController.text == "") {
-      _nameError = "Name is required";
+      _nameError = "Username is required";
     } else {
       _nameError = null;
     }
@@ -51,7 +56,6 @@ class _SignupPageState extends State<SignupPage> {
     } else {
       _confirmPasswordError = null;
     }
-    print(_confirmPasswordError);
     setState(() {});
 
     if (_nameError == null &&
@@ -61,6 +65,50 @@ class _SignupPageState extends State<SignupPage> {
       return true;
     }
     return false;
+  }
+
+  void _signup() async {
+    try {
+      if (_validate()) {
+        setState(() {
+          _loading = true;
+        });
+        var response = await AuthRepositories().signUp({
+          "username": _nameController.text,
+          "email": _emailController.text,
+          "password": _passwordController.text,
+        });
+        if (response.code == 200) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (ctx) => const SigninPage()));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(response.message ?? ""),
+            ),
+          );
+        }
+      }
+    } on SocketException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("No Internet Connection."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString(),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
   }
 
   Widget _errorWidget(String? error) {
@@ -141,7 +189,7 @@ class _SignupPageState extends State<SignupPage> {
                       prefixIcon: Icons.person_outline_rounded,
                       textInputAction: TextInputAction.next,
                       textInputType: TextInputType.text,
-                      hintText: "Name",
+                      hintText: "Username",
                     ),
                     _errorWidget(_nameError),
                   ],
@@ -209,9 +257,11 @@ class _SignupPageState extends State<SignupPage> {
                 padding: EdgeInsets.only(top: 60.h),
                 child: ElevatedButton(
                   onPressed: () {
-                    print(_validate());
+                    _signup();
                   },
-                  child: const Text("Sign Up"),
+                  child: _loading
+                      ? const CircularProgressIndicator()
+                      : const Text("Sign Up"),
                 ),
               ),
               Padding(
@@ -252,12 +302,18 @@ class _SignupPageState extends State<SignupPage> {
                     SizedBox(
                       width: 14.w,
                     ),
-                    Text(
-                      "Login",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.w300,
-                          ),
+                    GestureDetector(
+                      onTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => const SigninPage())),
+                      child: Text(
+                        "Login",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w300,
+                            ),
+                      ),
                     ),
                   ],
                 ),

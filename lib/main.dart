@@ -7,19 +7,46 @@ import 'package:dokan/pages/signin.dart';
 import 'package:dokan/pages/signup.dart';
 import 'package:dokan/utils/constants/colors.dart';
 import 'package:dokan/utils/constants/sizes.dart';
+import 'package:dokan/utils/storage/shared_prefs.dart';
 import 'package:dokan/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+
+  await SharedPrefs.init();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _authenticated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPrefs.getBool("authenticated").then((val) {
+      setState(() {
+        _authenticated = val;
+      });
+      FlutterNativeSplash.remove();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
@@ -32,7 +59,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Dokan',
             theme: TAppTheme.lightTheme,
-            home: const SignupPage(),
+            home: _authenticated ? const LandingPage() : const SigninPage(),
           );
         },
       ),
