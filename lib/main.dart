@@ -81,26 +81,28 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Container(
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [
-                Color(0xffFF679B),
-                Color(0xffFF7B51),
-              ],
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Icon(
-            Icons.search,
-            color: Colors.white,
-            size: TSizes.iconMd,
-          ),
-        ),
-      ),
+      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
+          ? FloatingActionButton(
+              onPressed: () {},
+              child: Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffFF679B),
+                      Color(0xffFF7B51),
+                    ],
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: TSizes.iconMd,
+                ),
+              ),
+            )
+          : null,
       body: PageView(
         controller: _pageController,
         onPageChanged: (val) => setState(() {
@@ -116,8 +118,8 @@ class _LandingPageState extends State<LandingPage> {
       bottomNavigationBar: AnimatedBottomNavigationBar(
         iconSize: TSizes.iconMd,
         icons: const [
-          Icons.home,
-          Icons.category,
+          Icons.home_rounded,
+          Icons.dashboard_rounded,
           Icons.shopping_cart,
           Icons.person,
         ],
