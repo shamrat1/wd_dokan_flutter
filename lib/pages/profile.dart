@@ -128,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 135.w,
                             child: OutlinedButton(
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () {},
                               child: Text(
                                 "Cancel",
                                 style: Theme.of(context).textTheme.bodySmall,
@@ -138,7 +138,22 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(
                             width: 135.w,
                             child: ElevatedButton(
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .showMaterialBanner(
+                                  MaterialBanner(
+                                    content: const Text(
+                                        "Update Profile is not implemented for lack of api provided."),
+                                    actions: [
+                                      IconButton(
+                                          onPressed: () => ScaffoldMessenger.of(
+                                                  context)
+                                              .removeCurrentMaterialBanner(),
+                                          icon: Icon(Icons.close)),
+                                    ],
+                                  ),
+                                );
+                              },
                               child: const Text(
                                 "Apply",
                               ),
