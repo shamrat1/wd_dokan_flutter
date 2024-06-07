@@ -31,6 +31,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     setState(() {
       _filters[i][_filters[i].keys.first] = val;
     });
+    // set others to false
+    for (var j = 0; j < _filters.length; j++) {
+      if (i != j) {
+        setState(() {
+          _filters[j][_filters[j].keys.first] = false;
+        });
+      }
+    }
   }
 
   Widget _filterView() {
